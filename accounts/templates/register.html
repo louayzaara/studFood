@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Creer un compte {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+      <div class="col-sm">
+      </div>
+      <div class="col-sm text-center">
+        <h1>Commencer maintenant!</h1>
+
+        <div class="col-md-6 order-md-last d-flex">
+
+            <form action="#" class="bg-white p-5 contact-form">
+
+              <div class="form-group">
+                <input type="text" name="username" class="form-control" placeholder="Enter Your Username">
+              </div>
+              <div class="form-group">
+                <input type="email" name="email" class="form-control" placeholder="Enter Your email">
+              </div>
+              <div class="form-group">
+                <input type="password" name="password1" class="form-control" placeholder="Enter Your Password">
+              </div>
+              <div class="form-group">
+                <input type="password" name="password2" class="form-control" placeholder="Confirm Your Password">
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Creer un compte" class="btn btn-primary py-3 px-5">
+              </div>
+              <p> Vous avez deja un compte ?<a href="{% url 'accounts:login-page' %}">Se Connecter</a></p>
+
+            </form>
+
+          </div>
+    </div>
+      <div class="col-sm">
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
