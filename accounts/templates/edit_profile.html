@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} StudFood| Editer votre profile {% endblock %}
+
+{% block content %}
+
+<div class="hero-wrap hero-bread" style="background-image: url({% static 'assets/images/bg_1.jpg' %});">
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-center justify-content-center">
+        <div class="col-md-9 ftco-animate text-center">
+          <h1 class="mb-0 bread"><strong>Editer votre profile</strong></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="ftco-section contact-section bg-light">
+    <div class="container">
+
+      <div class="row block-9 text-center">
+        <div class="col-md-12 order-md-last d-flex text-center" >
+          <form action="" method="POST" class="bg-white p-5 contact-form" enctype="multipart/form-data" data-parsley-validate="true" data-parsley-ui-enabled="true">
+              {% csrf_token %}
+            <div class="form-group">
+              <input type="text" name="last_name" class="form-control" placeholder="Nom" required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="first_name"class="form-control" placeholder="Prenom" required>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email"class="form-control" placeholder="Email @" required>
+              </div>
+              <div class="form-group">
+                <input type="text" name="phone_number"class="form-control" placeholder="numero de telephone" required>
+              </div>
+              <div class="form-group">
+                <input type="text" name="address"class="form-control" placeholder="Adresse" required>
+              </div>
+              <div class="form-group">
+                <input type="text" name="gender"class="form-control" placeholder="le genre" required>
+              </div>
+              <div class="form-group">
+                <input type="text" name="university"class="form-control" placeholder="Faculté" required>
+              </div>
+              
+            <div class="form-group">
+              <input type="file" class="form-control" name="profile_picture"placeholder="profile image" required>
+            </div>
+
+            <div class="form-group text-center">
+              <input type="submit" value="Editer le profile" class="btn btn-primary py-3 px-5">
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+{% endblock %}

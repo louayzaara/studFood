@@ -13,10 +13,26 @@ from django.conf import settings
 from .utils import generate_token
 from django.urls import reverse
 from django.http import HttpResponse
+from .forms import EditProfileForm
 # Create your views here.
 
 def ProfilePage(request):
     return render(request, 'profile.html')
+
+def EditProfilePage(request):
+    user=request.user.profile
+    form = EditProfileForm(instance=user)
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.info(request, 'Profile updated!')
+            return redirect('accounts:profile-page')
+    context = {
+        'form':form
+    }
+    return render(request, 'edit_profile.html',context)
+
 
 
 def registerPage(request):

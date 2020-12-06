@@ -9,6 +9,7 @@ class FoodMenu(models.Model):
     date = models.DateTimeField(null=True, blank=True)
     picture1 = models.ImageField(null=True, blank=True,upload_to='images/')
     picture2 = models.ImageField(null=True, blank=True,upload_to='images/')
+    picture3 = models.ImageField(null=True, blank=True,upload_to='images/')
     slug = models.SlugField(blank=True, unique=True,null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
