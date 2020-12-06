@@ -4,5 +4,3 @@ from django.shortcuts import render
 def base(request):
     return render(request, 'base.html')
 
-def HomePage(request):
-    return render(request, 'home.html')

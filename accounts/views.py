@@ -37,7 +37,7 @@ def EditProfilePage(request):
 
 def registerPage(request):
     if request.user.is_authenticated:
-        return redirect('base:home-page')
+        return redirect('studfood:home-page')
     else:
         form = CreateUserForm()
         if request.method == 'POST':

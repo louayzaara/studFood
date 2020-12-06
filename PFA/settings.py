@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'accounts',
     'studfood',
 
+    'django_filters',
+
     # ALL AUTH
     'allauth',
     'allauth.account',

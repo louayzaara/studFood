@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class FoodMenu(models.Model):
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=25, null=True)
     details = models.TextField(null=True)
     date = models.DateTimeField(null=True, blank=True)
