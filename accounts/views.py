@@ -15,6 +15,9 @@ from django.urls import reverse
 from django.http import HttpResponse
 # Create your views here.
 
+def ProfilePage(request):
+    return render(request, 'profile.html')
+
 
 def registerPage(request):
     if request.user.is_authenticated:
