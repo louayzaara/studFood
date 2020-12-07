@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} StudFood| Contacter nous {% endblock %}
+
+{% block content %}
+<section class="ftco-section contact-section bg-light">
+    <div class="container">
+        <div class="row d-flex mb-5 contact-info">
+        <div class="w-100"></div>
+        <div class="col-md-3 d-flex">
+            <div class="info bg-white p-4">
+              <p class="text-center"><span>Address:</span><br><a>LE KEF, Tunisie, 7100</a></p>
+            </div>
+        </div>
+        <div class="col-md-3 d-flex">
+            <div class="info bg-white p-4">
+              <p class="text-center"><span>Phone:</span> <a href="tel://1234567920"><br>+216 93660920</a></p>
+            </div>
+        </div>
+        <div class="col-md-3 d-flex">
+            <div class="info bg-white p-4">
+              <p class="text-center"><span>Email:</span> <a href="mailto:Louaybenzaara@outlook.fr"><br>Louaybenzaara@outlook.fr</a></p>
+            </div>
+        </div>
+        <div class="col-md-3 d-flex">
+            <div class="info bg-white p-4">
+              <p class="text-center"><span>Website:</span> <a href="http://www.isikef.rnu.tn/Fr/accueil_46_4"target="_blank"><br>ISI KEF</a></p>
+            </div>
+        </div>
+        {% if messages %}
+
+        <div class="alert alert-info" role="alert">
+           <button type="button" class="close" data-dismiss="alert">
+               <span aria-hidden="true">×</span>
+               <span class="sr-only">Close</span>
+           </button>
+              {% for message in messages %}
+                 {{ message }}
+              {% endfor %}
+           {% endif %}
+    </div>
+      <div class="row block-9">
+        <div class="col-md-6 order-md-last d-flex">
+          <form action="" method="POST" class="bg-white p-5 contact-form">
+            {% csrf_token %}
+
+            <div class="form-group">
+              <input type="text" class="form-control" name="full_name" placeholder="Nom et Prenom"required>
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" name="email"placeholder="Entrer votre Email"required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="subject"placeholder="Entrer le Suject"required>
+            </div>
+            <div class="form-group">
+              <textarea name="" id="" cols="30" rows="7" class="form-control" name="message"placeholder="Taper votre message.." required></textarea>
+            </div>
+            
+            {% if recaptcha %}
+                <div class="g-recaptcha text-center offset-md-2 mt-2 mb-3" data-sitekey="{{ public_key }}"></div>
+            {% endif %}
+            {% if failed_recaptcha %}
+            <h3  class="ml-0 mt-2 offset-md-1 text-center">Invalid reCAPTCHA. Please try again.<h3>
+            {% endif %}
+
+
+            <div class="form-group text-center">
+              <input type="submit" value="Contacter nous" class="btn btn-primary py-3 px-5">
+            </div>
+          </form>
+        
+        </div>
+
+        <div class="col-md-6 d-flex">
+            <div style="width: 100%"><iframe scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=isi%20kef+(My%20Business%20Name)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" width="100%" height="600" frameborder="0"></iframe><a href="https://www.maps.ie/route-planner.htm">Road Trip Planner</a></div>        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

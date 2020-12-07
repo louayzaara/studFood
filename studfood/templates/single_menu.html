@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} StudFood| Details {% endblock %}
+
+{% block content %}
+<style>
+        .box {
+        box-shadow: 0 0 05px grey;
+        padding:0 15px 0 15px;
+
+    }
+</style>
+<section class="ftco-section mt-0 pt-0">
+    <div class="container box">
+        {% for menu in singleMenu %}
+        <div class="row mt-5 pt-5">
+            <div class="col-lg-5 mb-5 ftco-animate">
+                <a href="{{menu.picture1.url}}" class="image-popup">
+                    <img src="{{menu.picture1.url}}" class="img-fluid" alt="photo-de-menu">
+                </a>
+                <a href="{{menu.picture2.url}}" class="image-popup">
+                    <img src="{{menu.picture2.url}}" class="img-fluid" alt="photo-de-menu">
+                </a>
+                <a href="{{menu.picture3.url}}" class="image-popup">
+                    <img src="{{menu.picture3.url}}" class="img-fluid" alt="photo-de-menu">
+                </a>
+            </div>
+
+
+            <div class="col-lg-7 product-details pl-md-5 ftco-animate">
+                <h3>{{menu.name}}</h3>
+                <p>{{menu.date}}</p>
+
+                <p><strong>{{menu.details}}</strong></p>
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <section class="ftco-section ftco-degree-bg">
+                                <div class="container">
+                                  <div class="row">
+                                    <div class="col-lg-12 ftco-animate">
+                                        {% if comment_number %}
+                                        <h3 class="mb-5">{{comment_number}} Comments</h3>
+                                        {% if messages %}
+                                        <div class="messages-alert " >
+                                          <div class="alert alert-info" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert">
+                                              <span aria-hidden="true">×</span>
+                                              <span class="sr-only">Close</span>
+                                            </button>
+                                            {% for message in messages %}
+                                            {{ message }}
+                                            {% endfor %}
+                                          </div>
+                                        </div>
+                                        {% endif %}
+                                        <ul class="comment-list">
+                                            {% for comment in comments_list %}
+                                          <li class="comment">
+                                            <div class="vcard bio">
+                                              <img src="{{comment.user.profile.profile_picture.url}}" alt="photo de profile">
+                                            </div>
+                                            <div class="comment-body">
+                                              <h3>{{comment.user.profile.first_name}} {{comment.user.profile.last_name}}</h3>
+                                              <div class="meta">{{comment.created_at}}</div>
+                                              <p>{{comment.comment}}</p>
+                                            </div>
+                                          </li>
+                                          {% endfor %}
+                                          </ul>
+                                          {% endif %}
+
+                                          {% if user.is_authenticated %}
+                                          <div class="col-md-12 order-md-last d-flex">
+
+                                            <form action="" method="POST" class="bg-white p-5 contact-form ">
+
+                                                {% csrf_token %}
+
+                                                <div class="form-group">
+                                                    <input type="text"style="display:none"  class="form-control" name="menu" value="{{menu.id}}">
+                                                  </div>
+                     
+                                                <div class="form-group">
+                                                    <input type="text"style="display:none"  class="form-control" name="user" value="{{request.user.id}}">
+                                                  </div>
+
+                                                <div class="form-group">
+                                                  <input type="text" class="form-control" name="comment"placeholder="Taper un commentaire "required>
+                                                </div>
+
+                                                
+                                                <div class="form-group text-center">
+                                                  <input type="submit" value="Commenter" class="btn btn-primary py-3 px-5">
+                                                </div>
+                                              </form>
+                                          </div>
+                                        {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </section>
+                        </div>
+                     </div>
+                </div>
+            </div>
+
+    {% endfor %}
+    </div>
+</section>
+
+
+
+
+
+{% endblock %}

@@ -30,14 +30,12 @@
                             </div>
                             <h3 class="heading"><a href="#">{{menu.name}}</a></h3>
                             <p>{{menu.details}}</p>
-                            <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Plus de détails</a></p>
+                            <p><a href="{% url 'studfood:single-menu' menu.id %}" class="btn btn-primary py-2 px-3">Plus de détails</a></p>
                         </div>
                         </div>
                     </div>
                     {% endfor %}
                     {% endif %}
-
-
                     
                 </div>
                 
@@ -80,53 +78,19 @@
                 </div>
               </form>
             </div>
+            {% if category_list %}
             <div class="sidebar-box ftco-animate">
-            	<h3 class="heading">Categories</h3>
+              <h3 class="heading">Categories</h3>
+              {% for category in category_list %}
               <ul class="categories">
-                <li><a href="#">Vegetables <span>(12)</span></a></li>
-                <li><a href="#">Fruits <span>(22)</span></a></li>
-                <li><a href="#">Juice <span>(37)</span></a></li>
-                <li><a href="#">Dries <span>(42)</span></a></li>
+                <li><a href="#">{{category}}<span></span></a></li>
+                {% endfor %}
               </ul>
+              {% endif %}
             </div>
 
-            <div class="sidebar-box ftco-animate">
-              <h3 class="heading">Recent Blog</h3>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
+            
             <div class="sidebar-box ftco-animate">
               <h3 class="heading">Tag Cloud</h3>
               <div class="tagcloud">
@@ -141,10 +105,7 @@
               </div>
             </div>
 
-            <div class="sidebar-box ftco-animate">
-              <h3 class="heading">Paragraph</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-            </div>
+
           </div>
 
         </div>
