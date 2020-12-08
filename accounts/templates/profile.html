@@ -36,7 +36,7 @@
             {% endif %}
             <div class="row mt-3">
             <div class="col-lg-6 mb-5 ftco-animate " style="margin-top: 20px;">
-                <a  class="image-popup"><img  src="{{request.user.profile.profile_picture.url}}" class="img-fluid" alt="photo de profile"></a>
+                <a href="{{request.user.profile.profile_picture.url}}" class="image-popup"><img  src="{{request.user.profile.profile_picture.url}}" class="img-fluid" alt="photo de profile"></a>
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate"style="margin-top: 20px;">
                 <h1> <strong>{{request.user.profile.first_name}} {{request.user.profile.last_name}}</strong></h1>

@@ -17,7 +17,8 @@ class Profile(models.Model):
     gender = models.CharField(max_length=25, null=True)
     university = models.CharField(max_length=25, null=True)
     slug = models.SlugField(blank=True, unique=True,null=True)
-    is_verified = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=True)
+    is_restaurant = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):

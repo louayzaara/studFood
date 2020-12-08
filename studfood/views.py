@@ -9,7 +9,19 @@ import json
 import urllib
 from django.core.mail import EmailMessage
 from django.contrib.sites.shortcuts import get_current_site
+from accounts.models import Profile
 # Create your views here.
+
+
+
+def welcomePage(request):
+    rest_list = Profile.objects.filter(is_restaurant=True)
+    context = {
+        'rest_list':rest_list,
+    }
+    return render(request, 'welcome.html',context)
+
+
 def homePage(request):
     menu_list = FoodMenu.objects.all()
     category_list = category.objects.all()
