@@ -1,5 +1,5 @@
 """
-WSGI config for PFA project.
+WSGI config for pfa project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,7 +11,7 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 from whitenoise import WhiteNoise
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'PFA.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pfa.settings')
 
 application = get_wsgi_application()
 application = WhiteNoise(application)

@@ -181,7 +181,7 @@
 
 			if( direction === 'down' && !$(this.element).hasClass('ftco-animated') ) {
 
-				var comma_separator_number_step = $.animateNumber.numberStepFactories.separator(',')
+				var comma_separator_number_step = $.animateNumber.numberStepfactories.separator(',')
 				$('.number').each(function(){
 					var $this = $(this),
 						num = $this.data('number');

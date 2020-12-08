@@ -1,1 +1,1 @@
-web: gunicorn PFA.wsgi --log-file -
+web: gunicorn pfa.wsgi --log-file -
