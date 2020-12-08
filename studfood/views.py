@@ -22,8 +22,12 @@ def welcomePage(request):
     return render(request, 'welcome.html',context)
 
 
-def homePage(request):
-    menu_list = FoodMenu.objects.all()
+def homePage(request,id):
+    if Profile.objects.filter(id=id).exists():
+        rest_menu_list = FoodMenu.objects.filter(user=id)
+    else:
+        return redirect('studfood:welcome-page')
+    menu_list = FoodMenu.objects.filter(user=id)
     category_list = category.objects.all()
     Filter = FoodMenuFilter(request.GET, queryset=menu_list)
     menu_list = Filter.qs

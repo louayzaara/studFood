@@ -14,7 +14,7 @@ SECRET_KEY = '45^k4j0zg^+owp#l&d)r^&@g*kut)6(-!pf!_*5!eub6bf(&ai'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','pfa-studfood.herokuapp.com']
+ALLOWED_HOSTS = ['localhost','studfood.herokuapp.com']
 SITE_ID = 1
 
 # Application definition
