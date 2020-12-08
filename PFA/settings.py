@@ -12,9 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '45^k4j0zg^+owp#l&d)r^&@g*kut)6(-!pf!_*5!eub6bf(&ai'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','pfa-studfood.herokuapp.com']
 SITE_ID = 1
 
 # Application definition
