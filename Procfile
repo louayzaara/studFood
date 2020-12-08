@@ -1,0 +1,1 @@
+web: gunicorn PFA.wsgi --log-file -
