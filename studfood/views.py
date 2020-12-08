@@ -10,6 +10,8 @@ import urllib
 from django.core.mail import EmailMessage
 from django.contrib.sites.shortcuts import get_current_site
 from accounts.models import Profile
+from django.contrib.auth.models import User
+
 # Create your views here.
 
 
@@ -23,7 +25,7 @@ def welcomePage(request):
 
 
 def homePage(request,id):
-    if Profile.objects.filter(id=id).exists():
+    if User.objects.filter(id=id).exists():
         rest_menu_list = FoodMenu.objects.filter(user=id)
     else:
         return redirect('studfood:welcome-page')
