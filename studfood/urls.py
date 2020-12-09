@@ -9,4 +9,6 @@ urlpatterns = [
      path('contacter-nous/', views.ContactusPage, name="contactus-page"),
      path('', views.welcomePage, name="welcome-page"),
      path('search/',views.searchPage, name="search-page"),
+     path('search-profile/',views.searchProfilePage, name="search-profile-page"),
+
  ]

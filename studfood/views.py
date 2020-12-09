@@ -22,6 +22,15 @@ def searchPage(request):
             }
         return render(request,'search_page.html',context)
 
+def searchProfilePage(request):
+    if request.method == 'GET':
+        search = request.GET.get('search')
+        post =  FoodMenu.objects.all().filter(name=search) 
+        context = {
+            'post':post
+            }
+        return render(request,'search_profile_page.html',context)
+
 
 
 def welcomePage(request):
