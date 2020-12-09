@@ -16,7 +16,7 @@ from .filters import ProfileFilter
 def searchPage(request):
     if request.method == 'GET':
         search = request.GET.get('search')
-        post =  Profile.objects.all().filter(first_name=search) or Profile.objects.all().filter(last_name=search) or Profile.objects.all().filter(university=search)
+        post =  Profile.objects.all().filter(first_name=search) or Profile.objects.all().filter(last_name=search) 
         context = {
             'post':post
             }
