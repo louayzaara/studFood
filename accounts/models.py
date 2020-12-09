@@ -13,7 +13,7 @@ class Profile(models.Model):
     email = models.EmailField(max_length=30,null=True,blank=True)
     phone_number = models.CharField(max_length=20, null=True,blank=True)
     address = models.CharField(max_length=300, null=True, blank=True)
-    profile_picture = models.ImageField(default="default_logo.png",null=True, blank=True,upload_to='images/')
+    profile_picture = models.ImageField(null=True, blank=True,upload_to='images/')
     gender = models.CharField(max_length=25, null=True,blank=True)
     university = models.CharField(max_length=25, null=True,blank=True)
     slug = models.SlugField(blank=True, unique=True,null=True)
@@ -33,3 +33,5 @@ def create_profile(sender, **kwargs):
         slug = slugify(str(kwargs['instance']) + '-' +'1')
         )
 post_save.connect(create_profile, sender=User)
+
+

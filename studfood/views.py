@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import FoodMenu, Comment, category
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .filters import FoodMenuFilter
-from .forms import CommentForm,ContactUsForm
+from .forms import CommentForm,ContactUsForm, subscriptionForm
 from django.contrib import messages
 from django.conf import settings
 import json
@@ -40,6 +40,14 @@ def welcomePage(request):
         if not user.profile.first_name or not user.profile.last_name or not user.profile.university or not user.profile.phone_number:
             messages.info(request, 'afin de continuer à utiliser notre plateforme, veuillez mettre à jour vos informations de profil!')
             return redirect('accounts:edit-profile-page')
+   
+    if request.method == 'POST':
+        form = subscriptionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.info(request, 'Merci pour  votre abonnement')
+        else:
+            messages.info(request, 'erreur!')      
 
     rest_list = Profile.objects.filter(is_restaurant=True)
 

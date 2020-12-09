@@ -89,7 +89,7 @@ def registerPage(request):
 
 def loginPage(request):
     if request.user.is_authenticated:
-        return redirect('studfood:home-page')
+        return redirect('studfood:welcome-page')
     else:
         if request.method == 'POST':
             username = request.POST.get('username')

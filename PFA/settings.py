@@ -75,14 +75,6 @@ TEMPLATES = [
     },
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.zoho.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL= 'dev.firas@zohomail.com'
-EMAIL_HOST_USER = 'dev.firas@zohomail.com'
-EMAIL_HOST_PASSWORD = 'FirasDev2020'
-
 GOOGLE_RECAPTCHA_PUBLIC_KEY = '6LeZGdQZAAAAAEk07Vw23kYXShmUCE5PxZUL3ZCT'
 GOOGLE_RECAPTCHA_SECRET_KEY = '6LeZGdQZAAAAAGyuBAC5IMwNi52o7sISpI4NlAwt'
 
@@ -117,6 +109,18 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'djangodatabase',
+#         'USER': 'dbadmin',
+#         'PASSWORD': '12345',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
 
 
 # Password validation
