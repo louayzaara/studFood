@@ -16,7 +16,7 @@
   </div>
   <section class="ftco-section">
     <div class="container">
-                <form action="#" class="search-form">
+            <form action="{% url 'studfood:search-page'%}" method="get" class="search-form">
             <div class="form-group">
               <span class="icon ion-ios-search"></span>
               <input type="text" class="form-control" placeholder="Search...">
@@ -54,19 +54,36 @@
             {% endif %}
         </div>
         <div class="row mt-5">
-      <div class="col text-center">
-        <div class="block-27">
-          <ul>
-            <li><a href="#">&lt;</a></li>
-            <li class="active"><span>1</span></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&gt;</a></li>
-          </ul>
-        </div>
-      </div>
+          {% if rest_list.has_other_pages %}
+
+          <div class="row mt-5">
+              <div class="col text-center">
+              <div class="block-27">
+                  {% if rest_list.has_other_pages %}
+                  <ul>
+                      {% if rest_list.has_previous %}
+    
+                  <li><a href="?page={{rest_list.previous_page_number}}">&lt;</a></li>
+                  {% endif %}
+    
+                  {% for i in rest_list.paginator.page_range %}
+                  {% if rest_list.number == i %}
+                  <li><a class="active" href="?page={{i}}">{{i}}</a></li>
+                  {% else %}
+                  <li><a href="?page={{i}}">{{i}}</a></li>
+                  {% endif %}
+                  {% endfor %}
+                  {% if rest_list.has_next %}
+                  <li><a href="?page={{rest_list.paginator.num_pages}}">&gt;</a></li>
+                  {% endif %}
+                  </ul>
+                  {% endif %}
+              </div>
+              </div>
+          </div>
+    
+    {% endif %}
+
     </div>
     </div>
 </section>

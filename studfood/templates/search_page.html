@@ -1,0 +1,17 @@
+{% if post %}
+<h1>search result found</h1>
+
+{% for user in post %}
+<br>
+First name = {{user.first_name}}<br>
+Last name  = {{user.last_name}}<br>
+Gender {{user.gender}}<br>
+<img src="{{user.profile_picture.url}}" style="height:80px">
+<br>
+
+
+
+{% endfor %}
+{% else %}
+<h1>ups ! Nothing was found</h1>
+{% endif %}

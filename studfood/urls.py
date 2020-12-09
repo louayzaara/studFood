@@ -8,5 +8,5 @@ urlpatterns = [
      path('menu-info/<int:id>/',views.signleMenuPage, name="single-menu"),
      path('contacter-nous/', views.ContactusPage, name="contactus-page"),
      path('', views.welcomePage, name="welcome-page"),
-     
+     path('search/',views.searchPage, name="search-page"),
  ]

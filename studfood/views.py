@@ -11,13 +11,33 @@ from django.core.mail import EmailMessage
 from django.contrib.sites.shortcuts import get_current_site
 from accounts.models import Profile
 from django.contrib.auth.models import User
-
+from .filters import ProfileFilter
 # Create your views here.
+def searchPage(request):
+    if request.method == 'GET':
+        search = request.GET.get('search')
+        post =  Profile.objects.all().filter(first_name=search) or Profile.objects.all().filter(last_name=search) or Profile.objects.all().filter(university=search)
+        context = {
+            'post':post
+            }
+        return render(request,'search_page.html',context)
 
 
 
 def welcomePage(request):
     rest_list = Profile.objects.filter(is_restaurant=True)
+
+    Filter = ProfileFilter(request.GET, queryset=rest_list)
+    rest_list = Filter.qs
+
+    page = request.GET.get('page')
+    paginator = Paginator(rest_list, 6)
+    try:
+        rest_list = paginator.page(page)
+    except PageNotAnInteger:
+        rest_list = paginator.page(1)
+    except EmptyPage:
+        rest_list = paginator.page(paginator.page_range)
     context = {
         'rest_list':rest_list,
     }
