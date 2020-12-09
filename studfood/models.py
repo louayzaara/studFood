@@ -47,11 +47,10 @@ class Comment(models.Model):
 
 
 class Contacter_nous(models.Model):
-    full_name = models.CharField(max_length=100, null=False, blank=False)
-    email = models.EmailField(max_length=200,null=False, blank=False)
-    subject = models.CharField(max_length=100, null=False, blank=False)
-    message = models.TextField(null=False, blank=False)
-
+    full_name = models.CharField(max_length=100, null=True, blank=True)
+    email = models.EmailField(max_length=200,null=True, blank=True)
+    subject = models.CharField(max_length=100, null=True, blank=True)
+    message = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return  self.full_name

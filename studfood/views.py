@@ -66,7 +66,6 @@ def homePage(request,id):
         if not user.profile.first_name or not user.profile.last_name or not user.profile.university or not user.profile.phone_number:
             messages.info(request, 'afin de continuer à utiliser notre plateforme, veuillez mettre à jour vos informations de profil!')
             return redirect('accounts:edit-profile-page')
-            
     if User.objects.filter(id=id).exists():
         rest_menu_list = FoodMenu.objects.filter(user=id)
     else:
