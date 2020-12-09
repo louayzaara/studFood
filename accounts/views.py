@@ -17,6 +17,11 @@ from .forms import EditProfileForm
 # Create your views here.
 
 def ProfilePage(request):
+    if request.user.username:
+        user = User.objects.get(username=request.user.username)
+        if not user.profile.first_name or not user.profile.last_name or not user.profile.university or not user.profile.phone_number:
+            messages.info(request, 'afin de continuer à utiliser notre plateforme, veuillez mettre à jour vos informations de profil!')
+            return redirect('accounts:edit-profile-page')
     return render(request, 'profile.html')
 
 def EditProfilePage(request):
@@ -33,8 +38,6 @@ def EditProfilePage(request):
     }
     return render(request, 'edit_profile.html',context)
 
-
-
 def registerPage(request):
     if request.user.is_authenticated:
         return redirect('studfood:home-page')
@@ -48,62 +51,41 @@ def registerPage(request):
             password2 = request.POST['password2']
 
             if len(username) < 8:
-                messages.error(request,"username should be more than 8 digits!")
+                messages.error(request,"le nom d'utilisateur doit comporter plus de 8 chiffres!")
                 return redirect("accounts:register-page")
 
             userCheck = User.objects.filter(username=username)
             if userCheck:
-                messages.error(request,"username is already taken, try another!")
+                messages.error(request,"le nom d'utilisateur est déjà pris, essayez-en un autre!")
                 return redirect("accounts:register-page")
 
             checkMail = User.objects.filter(email=email)
             if checkMail:
-                messages.error(request,"Email is already taken by an other user!")
+                messages.error(request,"E-mail est déjà pris par un autre utilisateur!")
                 return redirect("accounts:register-page")
 
             if password1 != password2:
-                messages.error(request,"Password doesn't match please try again!")
+                messages.error(request,"Mot de passe ne correspond pas, veuillez réessayer!")
                 return redirect("accounts:register-page")
 
             if form.is_valid():
                 email = request.POST['email']
                 user = form.save()
-                user.is_active = False
+                user.is_active = True
                 user.email = email
                 user.save()
-                email = request.POST['email']
-
-                uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
-                domain = get_current_site(request).domain
-                link = reverse('accounts:activate', kwargs={
-                    'uidb64':uidb64,
-                    'token':generate_token.make_token(user)})
-                activate_url = 'https://'+domain+link
-                email_body = 'Hi' +' ' +user.username + '\nPlease use this link to verify your account  \n' +activate_url + '\n\nThanks for using our site!' +'\nThe '+domain  +' team'
-                email_subject = 'accounts activation'
-                to_email = email
-                email = EmailMessage(
-                    email_subject, email_body, to=[to_email]
-                )
-                email.send()
                 username = request.POST.get('username')
-                messages.success(request, 'Account was created for ' + username + '  ' + 'please check your email address to verify your account !')
+                messages.success(request, 'Le compte a été créé pour  ' + username + '  ' )
                 return redirect('accounts:login-page')
 
             else:
-                messages.error(request,"Something went wrong, Please try again!")
+                messages.error(request,"Une erreur s'est produite. Veuillez réessayer!")
                 return redirect("accounts:register-page")
 
-
     context = {
-
         'form':form,
-
     }
     return render(request, 'register.html',context)
-
-# def RegisterPage(request):
-#     return render(request, 'register.html')
 
 def loginPage(request):
     if request.user.is_authenticated:
@@ -116,15 +98,13 @@ def loginPage(request):
             if user :
                 if  user.is_active:
                     login(request, user)
-                    return redirect('studfood:home-page')
+                    return redirect('studfood:welcome-page')
                 else:
-                    messages.info(request, 'in order to login , you need to verify your account , please check your email , we already sent you an Activation link!')
+                    messages.info(request, "Une erreur s'est produite. Veuillez réessayer!")
                     return redirect('accounts:login-page')
             else:
-                messages.error(request, 'Username or Password are incorrect')
+                messages.error(request, "Le nom d'utilisateur ou le mot de passe sont incorrects")
                 return redirect('accounts:login-page')
-
-
 
     context = {}
     return render(request, 'login.html', context)
@@ -133,14 +113,3 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('accounts:login-page')
-
-def activate(request, uidb64, token):
-    uid = force_text(urlsafe_base64_decode(uidb64))
-    user = User.objects.get(id=uid)
-    if user is not None and generate_token.check_token(user, token):
-        user.is_active = True
-        user.save()
-        return HttpResponse('Thank you for your email confirmation. Now you can login to  your account.')
-    else:
-        return HttpResponse('Activation link is invalid!')
-

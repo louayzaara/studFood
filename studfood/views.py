@@ -34,6 +34,13 @@ def searchProfilePage(request):
 
 
 def welcomePage(request):
+
+    if request.user.username:
+        user = User.objects.get(username=request.user.username)
+        if not user.profile.first_name or not user.profile.last_name or not user.profile.university or not user.profile.phone_number:
+            messages.info(request, 'afin de continuer à utiliser notre plateforme, veuillez mettre à jour vos informations de profil!')
+            return redirect('accounts:edit-profile-page')
+
     rest_list = Profile.objects.filter(is_restaurant=True)
 
     Filter = ProfileFilter(request.GET, queryset=rest_list)
@@ -54,6 +61,12 @@ def welcomePage(request):
 
 
 def homePage(request,id):
+    if request.user.username:
+        user = User.objects.get(username=request.user.username)
+        if not user.profile.first_name or not user.profile.last_name or not user.profile.university or not user.profile.phone_number:
+            messages.info(request, 'afin de continuer à utiliser notre plateforme, veuillez mettre à jour vos informations de profil!')
+            return redirect('accounts:edit-profile-page')
+            
     if User.objects.filter(id=id).exists():
         rest_menu_list = FoodMenu.objects.filter(user=id)
     else:
@@ -114,7 +127,6 @@ def ContactusPage(request):
     recaptcha = True
     failed_recaptcha = False
     secret = getattr(settings, 'GOOGLE_RECAPTCHA_SECRET_KEY', None)
-    admin_email = getattr(settings, 'EMAIL_HOST_USER', None)
     public_key = getattr(settings, 'GOOGLE_RECAPTCHA_PUBLIC_KEY', None)
 
     if request.method == 'POST':
@@ -130,20 +142,9 @@ def ContactusPage(request):
             response = urllib.request.urlopen(req)
             result = json.loads(response.read().decode())
             if result['success']:
-                email = request.POST['email']
-                full_name = request.POST['full_name']
-                subject = request.POST['subject']
-                domain = get_current_site(request).domain
-                email_body = 'bonjour' + ' '  +full_name  +'\n' +'\nNous avons reçu votre demande concernant' +' ' +subject + ' '+ 'et nous vous répondrons dans les plus brefs délais'+'\nMerci d utiliser notre site!' +'\nde la part de '+domain
-                email_subject = 'Contact-us'
-                to_email = email
-                email = EmailMessage(
-                    email_subject, email_body, to=[to_email]
-                )
-                email.send()
                 form.save()
                 form = ContactUsForm(request.POST)
-                messages.info(request, 'Votre message a été envoyé, vous recevrez une réponse dans les plus brefs délais, merci de nous contacter!')
+                messages.info(request, 'votre message a été envoyé, vous recevrez une réponse dans les plus brefs délais, merci de nous contacter!')
         else:
             form = ContactUsForm(request.POST)
             recaptcha = True
